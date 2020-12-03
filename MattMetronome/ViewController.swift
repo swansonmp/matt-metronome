@@ -2,25 +2,79 @@
 //  ViewController.swift
 //  MattMetronome
 //
-//  Created by user179115 on 12/1/20.
+//  Matthew Swanson
 //
 
 import AVFoundation
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet var masterSwitch: UISwitch!
     @IBOutlet var bpmStepper: UIStepper!
     @IBOutlet var bpmLabel: UILabel!
+    @IBOutlet var collectionView: UICollectionView!
     
     var player: AVAudioPlayer?
     var timer: Timer?
     var clickCount: Int = 0
     
+    let cellId = "beatCell"
+    var cellColor = true
+    
+    enum Sound {
+        case stressed
+        case normal
+        case none
+    }
+    
+    let sounds = [Sound.stressed: "woodblock",
+                  Sound.normal: "woodblock"]
+    
+    enum CustomError: Error {
+        case runtimeError(String)
+    }
+    
+    func getSound(soundType: Sound) throws -> String {
+        let soundFileName = sounds[soundType]
+        if (soundFileName == nil) {
+            throw CustomError.runtimeError("Sound type \(soundType) not supported!")
+        }
+        else {
+            return soundFileName!
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
+        // Initial setup
         bpmLabel.text = String(bpmStepper.value)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BeatCell
+        //cell.itemLabel.text = String(indexPath.row])
+        return cell
+     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? BeatCell {
+            
+            if (cell.sound == Sound.normal) {
+                cell.sound = Sound.stressed
+                cell.backgroundColor = UIColor.systemRed
+            }
+            else {
+                cell.sound = Sound.normal
+                cell.backgroundColor = UIColor.systemYellow
+            }
+        }
     }
 
     func playSound() {
@@ -43,7 +97,7 @@ class ViewController: UIViewController {
     }
     
     @objc func onTimerInterval() {
-        //self.playSound()
+        self.playSound()
         clickCount += 1
         print("Click \(clickCount)")
     }
@@ -68,9 +122,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func bpmChanged(_ sender: UIStepper) {
-        bpmLabel.text = String(bpmStepper.value)
-        disableTimer()
-        enableTimer()
+        bpmLabel.text = String(Int(bpmStepper.value))
+        if (masterSwitch.isOn) {
+            disableTimer()
+            enableTimer()
+        }
     }
 }
 

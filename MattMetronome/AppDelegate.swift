@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MattMetronome
 //
-//  Created by user179115 on 12/1/20.
+//  Matthew Swanson
 //
 
 import UIKit

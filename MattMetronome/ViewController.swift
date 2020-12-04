@@ -16,10 +16,11 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     let cellId = "beatCell"
     
+    var debug = true
     var player: AVAudioPlayer?
     var timer: Timer?
     var clickCount: Int = 0
-    var beatIndex: Int = 0
+    var currentIndex: Int = 0
     var numberOfBeats: Int = 0
     
     enum CustomError: Error {
@@ -40,7 +41,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func getSoundFile(soundType: Sound) -> String? {
         let soundFileName = sounds[soundType]
-        if (soundFileName == nil) {
+        if soundFileName == nil {
             return nil
         }
         else {
@@ -54,7 +55,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         collectionView.delegate = self
         
         // Initial setup
-        numberOfBeats = 4
+        numberOfBeats = 7
         bpmStepper.value = 90
         bpmLabel.text = String(Int(bpmStepper.value))
     }
@@ -66,12 +67,24 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BeatCell
         //cell.itemLabel.text = String(indexPath.row])
+        cell.beatIndex = currentIndex
+        
+        // Reset beat index if we're done initializing
+        currentIndex = (currentIndex + 1) % numberOfBeats
+        
         return cell
      }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? BeatCell {
             cell.toggleCell()
+        }
+    }
+    
+    func printSound(sound: Sound, index: Int) {
+        if debug {
+            clickCount += 1
+            print("Beat \(index+1)\t: \(soundOnomatopoeia[sound]!)\tCount: \(clickCount)")
         }
     }
 
@@ -92,19 +105,29 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
                 player.play()
                 
                 // Print debug information
-                clickCount += 1
-                print("Beat \(index+1)\t: \(soundOnomatopoeia[sound]!)\tCount: \(clickCount)")
+                printSound(sound: sound, index: index)
             } catch let error {
                 print("Error playing sound")
                 print(error.localizedDescription)
             }
         }
+        else {
+            printSound(sound: sound, index: index)
+        }
     }
     
     @objc func onTimerInterval() {
-        let cell = collectionView.visibleCells[beatIndex] as? BeatCell
-        self.playSound(sound: cell!.sound, index: beatIndex)
-        beatIndex = (beatIndex + 1) % numberOfBeats
+        let cells = collectionView.visibleCells as! [BeatCell]
+        var cell: BeatCell? = nil
+        for c in cells {
+            if c.beatIndex == currentIndex {
+                cell = c
+                break
+            }
+        }
+        //let cell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: CGPoint(x: 0, y: currentIndex))!) as? BeatCell
+        self.playSound(sound: cell!.sound, index: currentIndex)
+        currentIndex = (currentIndex + 1) % numberOfBeats
     }
     
     func enableTimer() {
@@ -117,7 +140,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     }
     
     @IBAction func masterSwitchToggled(_ sender: UISwitch) {
-        if (masterSwitch.isOn) {
+        if masterSwitch.isOn {
             onTimerInterval()
             enableTimer()
         }
@@ -128,7 +151,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     @IBAction func bpmChanged(_ sender: UIStepper) {
         bpmLabel.text = String(Int(bpmStepper.value))
-        if (masterSwitch.isOn) {
+        if masterSwitch.isOn {
             disableTimer()
             enableTimer()
         }

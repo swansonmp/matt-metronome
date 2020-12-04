@@ -8,6 +8,7 @@
 import UIKit
 
 class BeatCell: UICollectionViewCell {
+    var beatIndex: Int = -1
     var sound = ViewController.Sound.normal
     
     func toggleCell() {

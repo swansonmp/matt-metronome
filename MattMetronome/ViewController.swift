@@ -54,10 +54,30 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Initial setup
+        // Create gesture
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        collectionView.addGestureRecognizer(gesture)
+        
+        // Set paramters
         numberOfBeats = 7
         bpmStepper.value = 90
         bpmLabel.text = String(Int(bpmStepper.value))
+    }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else {
+                return
+            }
+            collectionView.beginInteractiveMovementForItem(at: indexPath)
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
+        case .ended:
+            collectionView.endInteractiveMovement()
+        default:
+            collectionView.cancelInteractiveMovement()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -79,6 +99,15 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         if let cell = collectionView.cellForItem(at: indexPath) as? BeatCell {
             cell.toggleCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        //let item = beats.remove(at: sourceIndexPath.row)
+        //beats.insert(item, at: destinationIndexPath.row)
     }
     
     func printSound(sound: Sound, index: Int) {

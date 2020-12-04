@@ -14,30 +14,34 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     @IBOutlet var bpmLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
+    let cellId = "beatCell"
+    
     var player: AVAudioPlayer?
     var timer: Timer?
     var clickCount: Int = 0
-    
-    let cellId = "beatCell"
-    var cellColor = true
-    
-    enum Sound {
-        case stressed
-        case normal
-        case none
-    }
-    
-    let sounds = [Sound.stressed: "woodblock",
-                  Sound.normal: "woodblock"]
+    var beatIndex: Int = 0
+    var numberOfBeats: Int = 0
     
     enum CustomError: Error {
         case runtimeError(String)
     }
     
-    func getSound(soundType: Sound) throws -> String {
+    enum Sound {
+        case normal
+        case stressed
+        case none
+    }
+    
+    let sounds = [Sound.normal: "woodblock",
+                  Sound.stressed: "woodblock"]
+    let soundOnomatopoeia = [Sound.normal: "tock",
+                             Sound.stressed: "TICK",
+                             Sound.none: "...."]
+    
+    func getSoundFile(soundType: Sound) -> String? {
         let soundFileName = sounds[soundType]
         if (soundFileName == nil) {
-            throw CustomError.runtimeError("Sound type \(soundType) not supported!")
+            return nil
         }
         else {
             return soundFileName!
@@ -50,11 +54,13 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         collectionView.delegate = self
         
         // Initial setup
-        bpmLabel.text = String(bpmStepper.value)
+        numberOfBeats = 4
+        bpmStepper.value = 90
+        bpmLabel.text = String(Int(bpmStepper.value))
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return numberOfBeats
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,41 +71,40 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? BeatCell {
-            
-            if (cell.sound == Sound.normal) {
-                cell.sound = Sound.stressed
-                cell.backgroundColor = UIColor.systemRed
-            }
-            else {
-                cell.sound = Sound.normal
-                cell.backgroundColor = UIColor.systemYellow
-            }
+            cell.toggleCell()
         }
     }
 
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "woodblock", withExtension: "mp3") else { return }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
+    func playSound(sound: Sound, index: Int) {
+        // Play sound if there's a sound file for it
+        if let soundFile = getSoundFile(soundType: sound) {
+            guard let url = Bundle.main.url(forResource: soundFile, withExtension: "mp3") else { return }
             
-            // For iOS 11 support
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            guard let player = player else { return }
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                try AVAudioSession.sharedInstance().setActive(true)
+                
+                // For iOS 11 support
+                player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+                
+                guard let player = player else { return }
 
-            player.play()
-        } catch let error {
-            print("Error!!!")
-            print(error.localizedDescription)
+                player.play()
+                
+                // Print debug information
+                clickCount += 1
+                print("Beat \(index+1)\t: \(soundOnomatopoeia[sound]!)\tCount: \(clickCount)")
+            } catch let error {
+                print("Error playing sound")
+                print(error.localizedDescription)
+            }
         }
     }
     
     @objc func onTimerInterval() {
-        self.playSound()
-        clickCount += 1
-        print("Click \(clickCount)")
+        let cell = collectionView.visibleCells[beatIndex] as? BeatCell
+        self.playSound(sound: cell!.sound, index: beatIndex)
+        beatIndex = (beatIndex + 1) % numberOfBeats
     }
     
     func enableTimer() {

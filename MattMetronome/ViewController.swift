@@ -96,6 +96,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         beats.append(Beat(index: currentIndex))
         cell.viewController = self
         cell.beatIndex = currentIndex
+        cell.makeCircle()
         
         // Reset beat index if we're done initializing
         currentIndex = (currentIndex + 1) % numberOfBeats

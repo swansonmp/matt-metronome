@@ -11,6 +11,11 @@ class BeatCell: UICollectionViewCell {
     var viewController: ViewController? = nil
     var beatIndex: Int = -1
     
+    func makeCircle() {
+        self.layer.cornerRadius = min(self.frame.size.height, self.frame.size.width) / 2.0
+        self.layer.masksToBounds = true
+    }
+    
     override var isSelected: Bool {
         didSet {
             self.layer.borderWidth = 4

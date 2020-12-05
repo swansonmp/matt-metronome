@@ -11,15 +11,8 @@ class Beat {
     var index: Int = -1
     var sound = ViewController.Sound.normal
     
-    init() { }
-    
     init(index: Int) {
         self.index = index
-    }
-    
-    init(index: Int, sound: ViewController.Sound) {
-        self.index = index
-        self.sound = sound
     }
     
     func toggleSound() {

@@ -8,6 +8,13 @@
 import AVFoundation
 import UIKit
 
+extension UICollectionView {
+    func deselectAllItems(animated: Bool) {
+        guard let selectedItems = indexPathsForSelectedItems else { return }
+        for indexPath in selectedItems { deselectItem(at: indexPath, animated: animated) }
+    }
+}
+
 class ViewController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet var masterSwitch: UISwitch!
     @IBOutlet var bpmStepper: UIStepper!
@@ -103,12 +110,32 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return true
+        // TODO - dragging has broken behavior
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        //let item = beats.remove(at: sourceIndexPath.row)
-        //beats.insert(item, at: destinationIndexPath.row)
+        let sourceCell = collectionView.cellForItem(at: sourceIndexPath) as! BeatCell
+        if let destinationCell = collectionView.cellForItem(at: destinationIndexPath) as? BeatCell {
+            // Correct cell beat indices
+            for cell in collectionView.visibleCells as! [BeatCell] {
+                if cell.beatIndex >= sourceCell.beatIndex && cell.beatIndex < destinationCell.beatIndex {
+                    cell.beatIndex -= 1
+                }
+                else if cell.beatIndex == sourceCell.beatIndex {
+                    cell.beatIndex = destinationCell.beatIndex
+                }
+            }
+            
+            // Correct beat data
+            let item = beats.remove(at: sourceCell.beatIndex)
+            beats.insert(item, at: destinationCell.beatIndex)
+            
+            // Correct cell colors
+            for cell in collectionView.visibleCells as! [BeatCell] {
+                cell.setColor()
+            }
+        }
     }
     
     func printSound(sound: Sound, index: Int) {

@@ -11,6 +11,18 @@ class BeatCell: UICollectionViewCell {
     var viewController: ViewController? = nil
     var beatIndex: Int = -1
     
+    override var isSelected: Bool {
+        didSet {
+            self.layer.borderWidth = 4
+            if self.isSelected {
+                self.layer.borderColor = UIColor.black.cgColor
+            }
+            else {
+                self.layer.borderColor = UIColor.clear.cgColor
+            }
+        }
+    }
+    
     func getBeat() -> Beat {
         return viewController!.beats[beatIndex]
     }

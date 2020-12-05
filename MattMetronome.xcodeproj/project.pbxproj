@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4012A328257C4A19004C91FE /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012A327257C4A19004C91FE /* Measure.swift */; };
 		403840CC25773ED200C30BBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403840CB25773ED200C30BBD /* AppDelegate.swift */; };
 		403840CE25773ED200C30BBD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403840CD25773ED200C30BBD /* SceneDelegate.swift */; };
 		403840D025773ED200C30BBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403840CF25773ED200C30BBD /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4012A327257C4A19004C91FE /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		403840C825773ED200C30BBD /* MattMetronome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MattMetronome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		403840CB25773ED200C30BBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		403840CD25773ED200C30BBD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				403840CD25773ED200C30BBD /* SceneDelegate.swift */,
 				403840CF25773ED200C30BBD /* ViewController.swift */,
 				403840D125773ED200C30BBD /* Main.storyboard */,
+				4012A327257C4A19004C91FE /* Measure.swift */,
 				40BCCDF22578875F000B8EED /* BeatCell.swift */,
 				40BEF867257B0DCA0097EF7A /* Beat.swift */,
 				403840D425773ED300C30BBD /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 			files = (
 				403840D025773ED200C30BBD /* ViewController.swift in Sources */,
 				40BCCDF32578875F000B8EED /* BeatCell.swift in Sources */,
+				4012A328257C4A19004C91FE /* Measure.swift in Sources */,
 				403840CC25773ED200C30BBD /* AppDelegate.swift in Sources */,
 				40BEF868257B0DCA0097EF7A /* Beat.swift in Sources */,
 				403840CE25773ED200C30BBD /* SceneDelegate.swift in Sources */,

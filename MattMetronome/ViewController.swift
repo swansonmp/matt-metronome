@@ -23,9 +23,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     var currentIndex: Int = 0
     var numberOfBeats: Int = 0
     
-    enum CustomError: Error {
-        case runtimeError(String)
-    }
+    var beats: [Beat] = []
     
     enum Sound {
         case normal
@@ -33,14 +31,14 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         case none
     }
     
-    let sounds = [Sound.normal: "woodblock",
+    let soundFiles = [Sound.normal: "woodblock",
                   Sound.stressed: "woodblock"]
     let soundOnomatopoeia = [Sound.normal: "tock",
                              Sound.stressed: "TICK",
                              Sound.none: "...."]
     
     func getSoundFile(soundType: Sound) -> String? {
-        let soundFileName = sounds[soundType]
+        let soundFileName = soundFiles[soundType]
         if soundFileName == nil {
             return nil
         }
@@ -86,7 +84,10 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BeatCell
-        //cell.itemLabel.text = String(indexPath.row])
+        
+        // Initialize cell data
+        beats.append(Beat(index: currentIndex))
+        cell.viewController = self
         cell.beatIndex = currentIndex
         
         // Reset beat index if we're done initializing
@@ -154,8 +155,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
                 break
             }
         }
-        //let cell = collectionView.cellForItem(at: collectionView.indexPathForItem(at: CGPoint(x: 0, y: currentIndex))!) as? BeatCell
-        self.playSound(sound: cell!.sound, index: currentIndex)
+        self.playSound(sound: cell!.getBeat().sound, index: currentIndex)
         currentIndex = (currentIndex + 1) % numberOfBeats
     }
     

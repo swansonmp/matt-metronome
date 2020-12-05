@@ -8,27 +8,22 @@
 import UIKit
 
 class BeatCell: UICollectionViewCell {
+    var viewController: ViewController? = nil
     var beatIndex: Int = -1
-    var sound = ViewController.Sound.normal
+    
+    func getBeat() -> Beat {
+        return viewController!.beats[beatIndex]
+    }
     
     func toggleCell() {
-        toggleSound()
+        let beat: Beat = getBeat()
+        beat.toggleSound()
         setColor()
     }
     
-    func toggleSound() {
-        switch sound {
-        case ViewController.Sound.normal:
-            sound = ViewController.Sound.stressed
-        case ViewController.Sound.stressed:
-            sound = ViewController.Sound.none
-        case ViewController.Sound.none:
-            sound = ViewController.Sound.normal
-        }
-    }
-    
     func setColor() {
-        switch sound {
+        let beat: Beat = getBeat()
+        switch beat.sound {
         case ViewController.Sound.normal:
             backgroundColor = UIColor.systemYellow
         case ViewController.Sound.stressed:

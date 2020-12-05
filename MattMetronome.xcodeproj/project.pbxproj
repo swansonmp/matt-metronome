@@ -15,6 +15,7 @@
 		403840D825773ED300C30BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 403840D625773ED300C30BBD /* LaunchScreen.storyboard */; };
 		403840E1257745F400C30BBD /* woodblock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 403840E0257745F400C30BBD /* woodblock.mp3 */; };
 		40BCCDF32578875F000B8EED /* BeatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BCCDF22578875F000B8EED /* BeatCell.swift */; };
+		40BEF868257B0DCA0097EF7A /* Beat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BEF867257B0DCA0097EF7A /* Beat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		403840D925773ED300C30BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		403840E0257745F400C30BBD /* woodblock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woodblock.mp3; sourceTree = "<group>"; };
 		40BCCDF22578875F000B8EED /* BeatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatCell.swift; sourceTree = "<group>"; };
+		40BEF867257B0DCA0097EF7A /* Beat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				403840CF25773ED200C30BBD /* ViewController.swift */,
 				403840D125773ED200C30BBD /* Main.storyboard */,
 				40BCCDF22578875F000B8EED /* BeatCell.swift */,
+				40BEF867257B0DCA0097EF7A /* Beat.swift */,
 				403840D425773ED300C30BBD /* Assets.xcassets */,
 				403840D625773ED300C30BBD /* LaunchScreen.storyboard */,
 				403840D925773ED300C30BBD /* Info.plist */,
@@ -147,6 +150,7 @@
 				403840D025773ED200C30BBD /* ViewController.swift in Sources */,
 				40BCCDF32578875F000B8EED /* BeatCell.swift in Sources */,
 				403840CC25773ED200C30BBD /* AppDelegate.swift in Sources */,
+				40BEF868257B0DCA0097EF7A /* Beat.swift in Sources */,
 				403840CE25773ED200C30BBD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,8 +17,6 @@ extension UICollectionView {
 
 class ViewController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet var playButton: UIBarButtonItem!
-    @IBOutlet var bpmStepper: UIStepper!
-    @IBOutlet var bpmLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
     let cellId = "beatCell"
@@ -35,6 +33,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     var tempIndex: Int = 0
     
     var beats: [[Beat]] = [[Beat(index: 0), Beat(index: 1), Beat(index: 2), Beat(index: 3)]]
+    var bpms: [Int] = [90]
     
     enum Sound {
         case normal
@@ -62,10 +61,6 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        // Set paramters
-        bpmStepper.value = 90
-        bpmLabel.text = String(Int(bpmStepper.value))
     }
     
     
@@ -78,6 +73,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BeatCell
         cell.makeCircle()
+        cell.setColor(sound: beats[indexPath.section][indexPath.item].sound)
         return cell
      }
     
@@ -96,6 +92,8 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "measure", for: indexPath) as! Measure
+        sectionHeader.initParameters(sectionIndex: beats.count - 1)
+        sectionHeader.setText()
         return sectionHeader
     }
     
@@ -156,7 +154,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     }
     
     func enableTimer() {
-        timer = Timer.scheduledTimer(timeInterval: Double(60)/Double(bpmStepper.value), target: self, selector: #selector(onTimerInterval), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: Double(60)/Double(bpms[currentMeasure]), target: self, selector: #selector(onTimerInterval), userInfo: nil, repeats: true)
     }
     
     func disableTimer() {
@@ -186,8 +184,24 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         }
     }
     
-    @IBAction func bpmChanged(_ sender: UIStepper) {
-        bpmLabel.text = String(Int(bpmStepper.value))
+    func beatsChanged(newBeats: Int, sectionIndex: Int) {
+        let currentBeats = beats[sectionIndex].count
+        if (newBeats < currentBeats) {
+            // Remove beat
+            let cellRow = beats[sectionIndex].count - 1
+            beats[sectionIndex].remove(at: cellRow)
+            collectionView.deleteItems(at: [IndexPath(row: cellRow, section: sectionIndex)])
+        }
+        else {
+            // Add beat
+            let cellRow = beats[sectionIndex].count
+            beats[sectionIndex].append(Beat(index: cellRow))
+            collectionView.insertItems(at: [IndexPath(row: cellRow, section: sectionIndex)])
+        }
+    }
+    
+    func bpmChanged(newBpm: Int, sectionIndex: Int) {
+        bpms[sectionIndex] = newBpm
         if playButton.title == PAUSE {
             disableTimer()
             enableTimer()

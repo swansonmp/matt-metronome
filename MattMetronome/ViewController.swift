@@ -148,7 +148,8 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             currentBeatCell.layer.borderColor = UIColor.black.cgColor
         }
         
-        self.playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
+        // Play sound
+        playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
         
         // Increment beat/measure
         currentIndex += 1
@@ -196,7 +197,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func beatsChanged(newBeats: Int, sectionIndex: Int) {
         let currentBeats = beats[sectionIndex].count
-        if (newBeats < currentBeats) {
+        if newBeats < currentBeats {
             // Remove beat
             let cellRow = beats[sectionIndex].count - 1
             beats[sectionIndex].remove(at: cellRow)

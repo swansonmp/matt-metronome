@@ -139,7 +139,15 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     // MARK: Timer
     
     @objc func onTimerInterval() {
-        //let cells = collectionView.visibleCells as! [BeatCell]
+        // Set colors
+        let cells = collectionView.visibleCells
+        for cell in cells {
+            cell.layer.borderColor = UIColor.clear.cgColor
+        }
+        if let currentBeatCell = collectionView.cellForItem(at: IndexPath(row: currentIndex, section: currentMeasure)) {
+            currentBeatCell.layer.borderColor = UIColor.black.cgColor
+        }
+        
         self.playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
         
         // Increment beat/measure

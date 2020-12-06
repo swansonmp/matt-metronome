@@ -12,18 +12,9 @@ class BeatCell: UICollectionViewCell {
     func makeCircle() {
         self.layer.cornerRadius = min(self.frame.size.height, self.frame.size.width) / 2.0
         self.layer.masksToBounds = true
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            self.layer.borderWidth = 4
-            if self.isSelected {
-                self.layer.borderColor = UIColor.black.cgColor
-            }
-            else {
-                self.layer.borderColor = UIColor.clear.cgColor
-            }
-        }
+        
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 4
     }
     
     func setColor(sound: ViewController.Sound) {

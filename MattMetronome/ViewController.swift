@@ -150,6 +150,8 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             if currentMeasure == beats.count {
                 currentMeasure = 0
             }
+            disableTimer()
+            enableTimer()
         }
     }
     
@@ -213,6 +215,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         if beats.count < MAX_MEASURES {
             let newMeasureIndex = beats.count
             beats.append([Beat(index: 0), Beat(index: 1), Beat(index: 2), Beat(index: 3)])
+            bpms.append(90)
             collectionView.insertSections([newMeasureIndex])
         }
     }
@@ -221,6 +224,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         if beats.count > 1 {
             let lastMeasureIndex = beats.count - 1
             beats.remove(at: lastMeasureIndex)
+            bpms.remove(at: lastMeasureIndex)
             collectionView.deleteSections([lastMeasureIndex - 1])
         }
     }

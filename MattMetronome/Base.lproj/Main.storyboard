@@ -96,9 +96,17 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="z89-xX-KJC"/>
-                                    <barButtonItem title="Add" id="6pm-Ij-1Ne"/>
+                                    <barButtonItem title="Add" id="6pm-Ij-1Ne">
+                                        <connections>
+                                            <action selector="addMeasure:" destination="BYZ-38-t0r" id="A9v-ez-meg"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="6eS-t9-9oq"/>
-                                    <barButtonItem title="Remove" id="J13-DH-PpD"/>
+                                    <barButtonItem title="Remove" id="J13-DH-PpD">
+                                        <connections>
+                                            <action selector="removeMeasure:" destination="BYZ-38-t0r" id="SCf-6H-H2d"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="Y8I-7K-9eV"/>
                                 </items>
                             </toolbar>

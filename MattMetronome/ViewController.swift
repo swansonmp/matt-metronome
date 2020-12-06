@@ -29,6 +29,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     var clickCount: Int = 0
     var currentIndex: Int = 0
     var numberOfBeats: Int = 0
+    var numberOfMeasures: Int = 1
     
     var beats: [Beat] = []
     
@@ -65,6 +66,9 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         bpmLabel.text = String(Int(bpmStepper.value))
     }
     
+    
+    // MARK: Collection View
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfBeats
     }
@@ -91,13 +95,16 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return numberOfMeasures
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "measure", for: indexPath) as! Measure
         return sectionHeader
     }
+    
+    
+    // MARK: Sound
     
     func printSound(sound: Sound, index: Int) {
         if debug {
@@ -134,6 +141,9 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         }
     }
     
+    
+    // MARK: Timer
+    
     @objc func onTimerInterval() {
         let cells = collectionView.visibleCells as! [BeatCell]
         var cell: BeatCell? = nil
@@ -155,6 +165,9 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         timer?.invalidate()
         timer = nil
     }
+    
+    
+    // MARK: Actions
     
     let PLAY = "Play"
     let PAUSE = "Pause"
@@ -180,6 +193,19 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         if playButton.title == PAUSE {
             disableTimer()
             enableTimer()
+        }
+    }
+    
+    let MAX_MEASURES = 5
+    @IBAction func addMeasure(_ sender: UIBarButtonItem) {
+        if numberOfMeasures < MAX_MEASURES {
+            numberOfMeasures += 1
+        }
+    }
+    
+    @IBAction func removeMeasure(_ sender: UIBarButtonItem) {
+        if numberOfMeasures > 1 {
+            numberOfMeasures -= 1
         }
     }
 }

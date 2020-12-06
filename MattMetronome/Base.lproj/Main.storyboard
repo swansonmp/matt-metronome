@@ -17,24 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="90" minimumValue="30" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="KAZ-mi-VdG">
-                                <rect key="frame" x="160" y="628" width="94" height="32"/>
-                                <connections>
-                                    <action selector="bpmChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xIu-Sf-1y6"/>
-                                </connections>
-                            </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="bpmLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lu-hA-ytK">
-                                <rect key="frame" x="169" y="586" width="76" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G4z-UQ-NCf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="442"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="442" id="8aS-ON-9ac"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="20" id="f7O-c6-n4M">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -56,30 +41,40 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="1" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="e3K-ef-1O4">
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="1" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="e3K-ef-1O4">
                                             <rect key="frame" x="72" y="8" width="94" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </stepper>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="beats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6z-os-8XF">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="beats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6z-os-8XF">
                                             <rect key="frame" x="21" y="14" width="43" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="90" minimumValue="15" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="vlL-Vu-k0y">
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="90" minimumValue="15" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="vlL-Vu-k0y">
                                             <rect key="frame" x="296" y="9" width="94" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </stepper>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="bpm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZZ-50-vtf">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="bpm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZZ-50-vtf">
                                             <rect key="frame" x="251" y="15" width="35" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                    <constraints>
+                                        <constraint firstItem="e3K-ef-1O4" firstAttribute="leading" secondItem="o6z-os-8XF" secondAttribute="trailing" constant="8" id="26E-hd-OK3"/>
+                                        <constraint firstItem="mZZ-50-vtf" firstAttribute="centerY" secondItem="vlL-Vu-k0y" secondAttribute="centerY" id="4ZL-rQ-Rzy"/>
+                                        <constraint firstItem="o6z-os-8XF" firstAttribute="top" secondItem="58f-Z9-5Ku" secondAttribute="topMargin" constant="6" id="4g4-LY-e9f"/>
+                                        <constraint firstItem="o6z-os-8XF" firstAttribute="leading" secondItem="58f-Z9-5Ku" secondAttribute="leadingMargin" constant="13" id="6N4-RX-xAk"/>
+                                        <constraint firstItem="e3K-ef-1O4" firstAttribute="top" secondItem="58f-Z9-5Ku" secondAttribute="topMargin" id="6SO-p0-gOC"/>
+                                        <constraint firstItem="o6z-os-8XF" firstAttribute="centerY" secondItem="vlL-Vu-k0y" secondAttribute="centerY" id="79K-lM-Ro7"/>
+                                        <constraint firstItem="mZZ-50-vtf" firstAttribute="top" secondItem="58f-Z9-5Ku" secondAttribute="topMargin" constant="7" id="DbZ-yf-pmh"/>
+                                        <constraint firstItem="vlL-Vu-k0y" firstAttribute="leading" secondItem="mZZ-50-vtf" secondAttribute="trailing" constant="10" id="j5P-tS-nY6"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="e3K-ef-1O4" secondAttribute="bottom" constant="2" id="m7e-FU-T3T"/>
+                                        <constraint firstItem="vlL-Vu-k0y" firstAttribute="top" secondItem="58f-Z9-5Ku" secondAttribute="topMargin" constant="1" id="nD4-I8-Zdi"/>
+                                        <constraint firstItem="o6z-os-8XF" firstAttribute="centerY" secondItem="e3K-ef-1O4" secondAttribute="centerY" id="vGa-tS-VSh"/>
+                                        <constraint firstItem="mZZ-50-vtf" firstAttribute="leading" secondItem="e3K-ef-1O4" secondAttribute="trailing" constant="85" id="xQF-Jl-U6w"/>
+                                    </constraints>
                                     <connections>
                                         <outlet property="beatsLabel" destination="o6z-os-8XF" id="kA6-3N-nvv"/>
                                         <outlet property="beatsStepper" destination="e3K-ef-1O4" id="yRI-EJ-vO1"/>
@@ -88,9 +83,11 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcG-YW-3Po">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcG-YW-3Po">
                                 <rect key="frame" x="-1" y="818" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CZm-mU-eef"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="l2b-rI-pD5"/>
                                     <barButtonItem title="Play" id="ItE-B9-XbS">
@@ -105,22 +102,41 @@
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="Y8I-7K-9eV"/>
                                 </items>
                             </toolbar>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="90" minimumValue="30" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="KAZ-mi-VdG">
+                                <rect key="frame" x="201" y="752" width="94" height="32"/>
+                                <connections>
+                                    <action selector="bpmChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xIu-Sf-1y6"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="bpmLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lu-hA-ytK">
+                                <rect key="frame" x="117" y="758" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8xH-B3-gsd"/>
-                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F0D-VD-YgS"/>
-                            <constraint firstItem="KAZ-mi-VdG" firstAttribute="top" secondItem="4lu-hA-ytK" secondAttribute="bottom" constant="21" id="Mve-tL-pH4"/>
-                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="centerX" secondItem="4lu-hA-ytK" secondAttribute="centerX" id="WOu-tn-emT"/>
-                            <constraint firstItem="4lu-hA-ytK" firstAttribute="centerX" secondItem="KAZ-mi-VdG" secondAttribute="centerX" id="u2Q-3K-2YT"/>
-                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wOA-du-S8q"/>
+                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1AW-lQ-vgC"/>
+                            <constraint firstItem="fcG-YW-3Po" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="E7C-P1-p3J"/>
+                            <constraint firstItem="fcG-YW-3Po" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-21" id="LQK-pL-4dS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fcG-YW-3Po" secondAttribute="trailing" constant="1" id="OTQ-IG-odX"/>
+                            <constraint firstItem="4lu-hA-ytK" firstAttribute="centerY" secondItem="KAZ-mi-VdG" secondAttribute="centerY" id="OgL-O8-t5R"/>
+                            <constraint firstItem="fcG-YW-3Po" firstAttribute="top" secondItem="KAZ-mi-VdG" secondAttribute="bottom" constant="34" id="Qmt-KJ-k2I"/>
+                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="n1J-l7-ufV"/>
+                            <constraint firstItem="4lu-hA-ytK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="117" id="psn-l4-BDr"/>
+                            <constraint firstItem="G4z-UQ-NCf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q8c-2z-BWp"/>
+                            <constraint firstItem="KAZ-mi-VdG" firstAttribute="top" secondItem="G4z-UQ-NCf" secondAttribute="bottom" constant="41" id="qr8-3Y-o4Z"/>
+                            <constraint firstItem="fcG-YW-3Po" firstAttribute="top" secondItem="4lu-hA-ytK" secondAttribute="bottom" constant="39" id="wUX-fg-T6h"/>
+                            <constraint firstItem="KAZ-mi-VdG" firstAttribute="leading" secondItem="4lu-hA-ytK" secondAttribute="trailing" constant="8" id="wqJ-VB-gby"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bpmLabel" destination="4lu-hA-ytK" id="DNd-wc-7Lf"/>
                         <outlet property="bpmStepper" destination="KAZ-mi-VdG" id="afR-zT-Z9h"/>
                         <outlet property="collectionView" destination="G4z-UQ-NCf" id="eLf-QQ-5zW"/>
+                        <outlet property="playButton" destination="ItE-B9-XbS" id="YWi-bc-xP3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

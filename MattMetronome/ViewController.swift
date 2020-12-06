@@ -16,7 +16,7 @@ extension UICollectionView {
 }
 
 class ViewController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
-    @IBOutlet var masterSwitch: UISwitch!
+    @IBOutlet var playButton: UIBarButtonItem!
     @IBOutlet var bpmStepper: UIStepper!
     @IBOutlet var bpmLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
@@ -59,30 +59,10 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Create gesture
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        collectionView.addGestureRecognizer(gesture)
-        
         // Set paramters
         numberOfBeats = 4
         bpmStepper.value = 90
         bpmLabel.text = String(Int(bpmStepper.value))
-    }
-    
-    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        switch gesture.state {
-        case .began:
-            guard let indexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else {
-                return
-            }
-            collectionView.beginInteractiveMovementForItem(at: indexPath)
-        case .changed:
-            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
-        case .ended:
-            collectionView.endInteractiveMovement()
-        default:
-            collectionView.cancelInteractiveMovement()
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -117,35 +97,6 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "measure", for: indexPath) as! Measure
         return sectionHeader
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        // TODO - dragging has broken behavior
-        return false
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let sourceCell = collectionView.cellForItem(at: sourceIndexPath) as! BeatCell
-        if let destinationCell = collectionView.cellForItem(at: destinationIndexPath) as? BeatCell {
-            // Correct cell beat indices
-            for cell in collectionView.visibleCells as! [BeatCell] {
-                if cell.beatIndex >= sourceCell.beatIndex && cell.beatIndex < destinationCell.beatIndex {
-                    cell.beatIndex -= 1
-                }
-                else if cell.beatIndex == sourceCell.beatIndex {
-                    cell.beatIndex = destinationCell.beatIndex
-                }
-            }
-            
-            // Correct beat data
-            let item = beats.remove(at: sourceCell.beatIndex)
-            beats.insert(item, at: destinationCell.beatIndex)
-            
-            // Correct cell colors
-            for cell in collectionView.visibleCells as! [BeatCell] {
-                cell.setColor()
-            }
-        }
     }
     
     func printSound(sound: Sound, index: Int) {
@@ -208,16 +159,16 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     let PLAY = "Play"
     let PAUSE = "Pause"
     @IBAction func playToggled(_ sender: UIBarButtonItem) {
-        if sender.title == PLAY {
+        if playButton.title == PLAY {
             onTimerInterval()
             enableTimer()
             
-            sender.title = PAUSE
+            playButton.title = PAUSE
         }
-        else if sender.title == PAUSE {
+        else if playButton.title == PAUSE {
             disableTimer()
             
-            sender.title = PLAY
+            playButton.title = PLAY
         }
         else {
             print("Invalid state")
@@ -226,7 +177,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     @IBAction func bpmChanged(_ sender: UIStepper) {
         bpmLabel.text = String(Int(bpmStepper.value))
-        if masterSwitch.isOn {
+        if playButton.title == PAUSE {
             disableTimer()
             enableTimer()
         }

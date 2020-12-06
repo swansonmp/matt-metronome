@@ -64,7 +64,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         collectionView.addGestureRecognizer(gesture)
         
         // Set paramters
-        numberOfBeats = 7
+        numberOfBeats = 4
         bpmStepper.value = 90
         bpmLabel.text = String(Int(bpmStepper.value))
     }
@@ -205,13 +205,22 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         timer = nil
     }
     
-    @IBAction func masterSwitchToggled(_ sender: UISwitch) {
-        if masterSwitch.isOn {
+    let PLAY = "Play"
+    let PAUSE = "Pause"
+    @IBAction func playToggled(_ sender: UIBarButtonItem) {
+        if sender.title == PLAY {
             onTimerInterval()
             enableTimer()
+            
+            sender.title = PAUSE
+        }
+        else if sender.title == PAUSE {
+            disableTimer()
+            
+            sender.title = PLAY
         }
         else {
-            disableTimer()
+            print("Invalid state")
         }
     }
     

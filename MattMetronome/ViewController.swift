@@ -148,6 +148,9 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             currentBeatCell.layer.borderColor = UIColor.black.cgColor
         }
         
+        disableTimer()
+        enableTimer()
+        
         // Play sound
         if currentMeasure < beats.count && currentIndex < beats[currentMeasure].count {
             playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
@@ -165,13 +168,13 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             if currentMeasure == beats.count {
                 currentMeasure = 0
             }
-            disableTimer()
-            enableTimer()
+            //disableTimer()
+            //enableTimer()
         }
     }
     
     func enableTimer() {
-        timer = Timer.scheduledTimer(timeInterval: Double(60)/Double(bpms[currentMeasure]), target: self, selector: #selector(onTimerInterval), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: Double(60)/Double(bpms[currentMeasure]), target: self, selector: #selector(onTimerInterval), userInfo: nil, repeats: false)
     }
     
     func disableTimer() {

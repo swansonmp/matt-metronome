@@ -247,7 +247,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             let lastMeasureIndex = beats.count - 1
             beats.remove(at: lastMeasureIndex)
             bpms.remove(at: lastMeasureIndex)
-            collectionView.deleteSections([lastMeasureIndex - 1])
+            collectionView.deleteSections([lastMeasureIndex])
         }
     }
     

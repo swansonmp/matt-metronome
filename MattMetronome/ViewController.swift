@@ -41,7 +41,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         case none
     }
     
-    let soundFiles = [Sound.normal: "woodblock",
+    let soundFiles = [Sound.normal: "woodblock-low",
                   Sound.stressed: "woodblock"]
     let soundOnomatopoeia = [Sound.normal: "tock",
                              Sound.stressed: "TICK",

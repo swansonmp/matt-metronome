@@ -17,6 +17,9 @@ class Measure: UICollectionReusableView {
     
     var sectionIndex: Int = -1
     
+    var last: Int? = nil
+    var taps: [Int] = []
+    
     func initParameters(sectionIndex: Int) {
         self.sectionIndex = sectionIndex
         beatsStepper.value = 4
@@ -38,5 +41,19 @@ class Measure: UICollectionReusableView {
     @IBAction func bpmChanged(_ sender: UIStepper) {
         setText()
         viewController.bpmChanged(newBpm: Int(bpmStepper.value), sectionIndex: sectionIndex)
+    }
+    
+    @IBAction func tapTapped(_ sender: UIButton) {
+        print(taps)
+        if last != nil {
+            if taps.count >= 8 {
+                taps.removeFirst()
+            }
+            taps.append(Int(Date().timeIntervalSince1970 * 1000) - last!)
+                
+            bpmStepper.value = Double(60000) / Double(Int(Double(taps.reduce(0, +)) / Double(taps.count)))
+            bpmChanged(bpmStepper)
+        }
+        last = Int(Date().timeIntervalSince1970 * 1000)
     }
 }

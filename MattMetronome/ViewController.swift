@@ -225,7 +225,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         }
     }
     
-    let MAX_MEASURES = 5
+    let MAX_MEASURES = 20
     @IBAction func addMeasure(_ sender: UIBarButtonItem) {
         if beats.count < MAX_MEASURES {
             let newMeasureIndex = beats.count
@@ -242,6 +242,10 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
             bpms.remove(at: lastMeasureIndex)
             collectionView.deleteSections([lastMeasureIndex - 1])
         }
+    }
+    
+    @IBAction func aboutButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "link", sender: self)
     }
 }
 

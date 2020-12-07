@@ -149,7 +149,13 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
         }
         
         // Play sound
-        playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
+        if currentMeasure < beats.count && currentIndex < beats[currentMeasure].count {
+            playSound(sound: beats[currentMeasure][currentIndex].sound, measure: currentMeasure, index: currentIndex)
+        }
+        else {
+            currentIndex = 0
+            currentMeasure = 0
+        }
         
         // Increment beat/measure
         currentIndex += 1

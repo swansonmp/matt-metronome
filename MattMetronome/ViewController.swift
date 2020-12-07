@@ -182,19 +182,23 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     // MARK: Actions
     
-    let PLAY = "Play"
-    let PAUSE = "Pause"
+    let PLAY = 0
+    let PAUSE = 1
     @IBAction func playToggled(_ sender: UIBarButtonItem) {
-        if playButton.title == PLAY {
+        if playButton.tag == PLAY {
             onTimerInterval()
             enableTimer()
             
-            playButton.title = PAUSE
+            playButton.tag = PAUSE
+            playButton.image = UIImage(systemName: "pause.fill")
+            playButton.tintColor = UIColor.systemRed
         }
-        else if playButton.title == PAUSE {
+        else if playButton.tag == PAUSE {
             disableTimer()
             
-            playButton.title = PLAY
+            playButton.tag = PLAY
+            playButton.image = UIImage(systemName: "play.fill")
+            playButton.tintColor = UIColor.systemGreen
         }
         else {
             print("Invalid state")
@@ -219,7 +223,7 @@ class ViewController: UIViewController,  UICollectionViewDataSource, UICollectio
     
     func bpmChanged(newBpm: Int, sectionIndex: Int) {
         bpms[sectionIndex] = newBpm
-        if playButton.title == PAUSE {
+        if playButton.tag == PAUSE {
             disableTimer()
             enableTimer()
         }

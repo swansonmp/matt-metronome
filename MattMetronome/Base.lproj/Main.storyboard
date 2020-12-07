@@ -66,7 +66,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                    <color key="backgroundColor" systemColor="systemFillColor"/>
                                     <constraints>
                                         <constraint firstItem="mZZ-50-vtf" firstAttribute="centerY" secondItem="vlL-Vu-k0y" secondAttribute="centerY" id="75K-Jm-Zdq"/>
                                         <constraint firstItem="vlL-Vu-k0y" firstAttribute="leading" secondItem="mZZ-50-vtf" secondAttribute="trailing" constant="10" id="GyM-tS-FWF"/>
@@ -97,19 +97,21 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="l2b-rI-pD5"/>
-                                    <barButtonItem title="Play" id="ItE-B9-XbS">
+                                    <barButtonItem image="play.fill" catalog="system" id="ItE-B9-XbS">
+                                        <color key="tintColor" systemColor="systemGreenColor"/>
                                         <connections>
                                             <action selector="playToggled:" destination="BYZ-38-t0r" id="Nch-JU-pOy"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="z89-xX-KJC"/>
-                                    <barButtonItem title="Add" id="6pm-Ij-1Ne">
+                                    <barButtonItem title="Add" image="plus" catalog="system" id="6pm-Ij-1Ne">
                                         <connections>
                                             <action selector="addMeasure:" destination="BYZ-38-t0r" id="A9v-ez-meg"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="6eS-t9-9oq"/>
-                                    <barButtonItem title="Remove" id="J13-DH-PpD">
+                                    <barButtonItem title="Remove" image="minus" catalog="system" id="J13-DH-PpD">
+                                        <color key="tintColor" systemColor="systemRedColor"/>
                                         <connections>
                                             <action selector="removeMeasure:" destination="BYZ-38-t0r" id="SCf-6H-H2d"/>
                                         </connections>
@@ -199,11 +201,20 @@ Matthew Swanson
     </scenes>
     <resources>
         <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
